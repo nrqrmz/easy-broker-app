@@ -1,0 +1,13 @@
+<% if @chats.any? %>
+  <ul>
+    <% @chats.each_with_index do |chat, index| %>
+      <li><%= link_to "Chat ##{index + 1}", chat_path(chat) %></li>
+    <% end %>
+  </ul>
+<% else %>
+  There are no chats yet.
+<% end %>
+
+<%= simple_form_for @chat do |f| %>
+  <%= f.button :submit, "New chat", class: "btn btn-primary" %>
+<% end %>

@@ -58,6 +58,9 @@ gem 'ostruct'
 gem 'solid_cable'
 gem 'solid_queue'
 gem 'solid_cache'
+gem "kramdown"
+gem "rouge"
+gem "kramdown-parser-gfm"
 
 group :development, :test do
   gem "dotenv-rails"
