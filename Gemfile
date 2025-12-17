@@ -61,6 +61,8 @@ gem 'solid_cache'
 gem "kramdown"
 gem "rouge"
 gem "kramdown-parser-gfm"
+gem "neighbor"
+
 
 group :development, :test do
   gem "dotenv-rails"

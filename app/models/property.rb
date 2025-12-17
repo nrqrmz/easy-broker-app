@@ -1,4 +1,6 @@
 class Property < ApplicationRecord
+  has_neighbors :embedding
+
   validates :public_id, presence: true, uniqueness: true
 
   def for_sale?
@@ -31,5 +33,28 @@ class Property < ApplicationRecord
 
   def rental_currency
     rental_operation&.dig('currency') || 'MXN'
+  end
+
+  private
+
+  def set_embedding
+    content = [
+      "Property title: #{title}",
+      "Property description: #{description}",
+      "Property type: #{property_type}",
+      "Location: #{location}",
+      "Region: #{region}",
+      "City: #{city}",
+      "City area: #{city_area}",
+      ("Bedrooms: #{bedrooms}" if bedrooms.present?),
+      ("Bathrooms: #{bathrooms}" if bathrooms.present?),
+      ("Parking spaces: #{parking_spaces}" if parking_spaces.present?),
+      ("Lot size: #{lot_size} m²" if lot_size.present?),
+      ("Construction size: #{construction_size} m²" if construction_size.present?),
+      ("Features: #{features.join(', ')}" if features.present?),
+      (operations.map { |op| "#{op['type']}: #{op['price']} #{op['currency']}" }.join(", ") if operations.present?)
+    ].compact.join(". ")
+    embedding = RubyLLM.embed(content)
+    update(embedding: embedding.vectors)
   end
 end

@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_17_160758) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_17_164105) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "vector"
 
   create_table "chats", force: :cascade do |t|
     t.string "model_id"
@@ -61,6 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_17_160758) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.jsonb "operations", default: []
+    t.vector "embedding", limit: 1536
     t.index ["public_id"], name: "index_properties_on_public_id", unique: true
   end
 
