@@ -10,3 +10,14 @@
 .navbar-lewagon .navbar-brand img {
   // width: 40px;
 }
+
+.navbar-lewagon .navbar-nav .nav-item.dropdown {
+  position: static;
+}
+
+.navbar-lewagon .navbar-nav .dropdown-menu {
+  position: absolute;
+  right: 0;
+  left: auto;
+  top: 100%;
+}

@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
   def create
     @chat = Chat.find(params[:chat_id])
 
-    ip_address = Rails.env.development? ? '177.240.124.174' : request.remote_ip
+    ip_address = Rails.env.development? ? ENV['DEV_IP_ADDRESS'] : request.remote_ip
     location_tool = LocationTool.new(ip_address: ip_address)
 
     embedding = RubyLLM.embed(params[:message][:content])

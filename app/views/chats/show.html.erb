@@ -1,16 +1,18 @@
 <%= turbo_stream_from @chat %>
 
-<%= link_to "← Back", chats_path, class: "px-3 mb-4 d-block" %>
+<div class="container my-3">
+  <%= link_to "← Back", chats_path, class: "px-3 mb-4 d-block" %>
 
-<div id="messages">
-  <% @chat.messages.each do |message| %>
-    <%= render 'messages/message', message: message %>
-  <% end %>
-</div>
+  <div id="messages">
+    <% @chat.messages.each do |message| %>
+      <%= render 'messages/message', message: message %>
+    <% end %>
+  </div>
 
-<div class="px-3 mt-4">
-  <%= simple_form_for [@chat, @message], data: { controller: "reset-form", action: "turbo:submit-end->reset-form#call" } do |f| %>
-    <%= f.input :content, placeholder: "Ask anything", required: true, label: false %>
-    <%= f.button :submit, "Submit", class: "btn btn-primary" %>
-  <% end %>
+  <div class="px-3 mt-4">
+    <%= simple_form_for [@chat, @message], data: { controller: "reset-form", action: "turbo:submit-end->reset-form#call" } do |f| %>
+      <%= f.input :content, placeholder: "Ask anything", required: true, label: false %>
+      <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
