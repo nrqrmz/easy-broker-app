@@ -1,4 +1,6 @@
 class MessagesController < ApplicationController
+  include ApplicationHelper
+
   def create
     @chat = Chat.find(params[:chat_id])
 
@@ -11,11 +13,31 @@ class MessagesController < ApplicationController
     instructions = system_prompt
     instructions += properties.map { |property| property_prompt(property) }.join("\n\n")
 
+    @assistant_message = nil
+    @accumulated_content = ""
+    @first_chunk = true
+
     if @chat.with_instructions(instructions)
             .with_tool(location_tool)
-            .ask(params[:message][:content])
+            .ask(params[:message][:content]) do |chunk|
+              next if chunk.content.blank?
 
-      redirect_to chat_path(@chat)
+              @accumulated_content += chunk.content
+
+              if @first_chunk
+                @assistant_message = @chat.messages.where(role: :assistant).reorder(created_at: :desc).first
+                broadcast_streaming_append(@assistant_message, @accumulated_content)
+                @first_chunk = false
+              else
+                broadcast_streaming_replace(@assistant_message, @accumulated_content)
+              end
+            end
+
+      # Final broadcast with proper partial rendering
+      @assistant_message.reload
+      broadcast_replace(@assistant_message)
+
+      head :ok
     else
       @message = @chat.messages.last
       render "chats/show", status: :unprocessable_entity
@@ -23,6 +45,43 @@ class MessagesController < ApplicationController
   end
 
   private
+
+  def broadcast_streaming_append(message, content)
+    Turbo::StreamsChannel.broadcast_append_to(
+      @chat,
+      target: "messages",
+      html: streaming_message_html(message, content)
+    )
+  end
+
+  def broadcast_streaming_replace(message, content)
+    Turbo::StreamsChannel.broadcast_replace_to(
+      @chat,
+      target: helpers.dom_id(message),
+      html: streaming_message_html(message, content)
+    )
+  end
+
+  def broadcast_replace(message)
+    Turbo::StreamsChannel.broadcast_replace_to(
+      @chat,
+      target: helpers.dom_id(message),
+      partial: "messages/message",
+      locals: { message: message }
+    )
+  end
+
+  def streaming_message_html(message, content)
+    markdown_html = render_markdown(content)
+
+    <<~HTML
+      <div class="d-flex justify-content-start mb-5" id="#{helpers.dom_id(message)}">
+        <div class="px-3 pb-0 pt-3">
+          #{markdown_html}
+        </div>
+      </div>
+    HTML
+  end
 
   def system_prompt
     "You are a real estate assistant for EasyBroker. \
@@ -35,7 +94,7 @@ class MessagesController < ApplicationController
       You have access to a location tool that can determine the user's current location. \
       If the user asks where they are or wants properties near them, use the location tool first. \
       Here are the nearest properties based on the user's question: "
-end
+  end
 
   def property_prompt(property)
     [

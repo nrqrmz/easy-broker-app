@@ -1,0 +1,6 @@
+
+
+
+<%= turbo_stream.replace "message_#{@streamed_message_id}" do %>
+  <%= render "messages/message", message: @message %>
+<% end %>

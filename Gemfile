@@ -53,7 +53,6 @@ gem "sassc-rails"
 
 gem 'ruby_llm'
 gem 'easy_broker'
-gem 'typhoeus'
 gem 'ostruct'
 gem 'solid_cable'
 gem 'solid_queue'
