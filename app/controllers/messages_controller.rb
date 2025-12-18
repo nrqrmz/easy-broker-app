@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   include ApplicationHelper
+  include Rails.application.routes.url_helpers
 
   def create
     @chat = Chat.find(params[:chat_id])
@@ -91,15 +92,20 @@ class MessagesController < ApplicationController
       If you don't find a suitable property, say so honestly and ask for more details. \
       Respond in the same language the user writes in (Spanish or English). \
       Your answer should be in markdown. \
+      IMPORTANT: When mentioning a property, ALWAYS include a markdown link to its detail page using the URL provided. \
+      Format property links as: [Property Title](property_url) \
       You have access to a location tool that can determine the user's current location. \
       If the user asks where they are or wants properties near them, use the location tool first. \
       Here are the nearest properties based on the user's question: "
   end
 
   def property_prompt(property)
+    prop_url = property_url(property.public_id, chat_id: @chat.id)
+
     [
       "PROPERTY public_id: #{property.public_id}",
       "title: #{property.title}",
+      "URL: #{prop_url}",
       "type: #{property.property_type}",
       "location: #{property.location}",
       "city: #{property.city}",

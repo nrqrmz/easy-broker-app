@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   resources :chats, only: %i[show index create] do
     resources :messages, only: [:create]
   end
+
+  resources :properties, only: [:show], param: :public_id
 end

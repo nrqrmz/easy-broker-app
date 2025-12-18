@@ -1,0 +1,266 @@
+// Property Show Page Styles
+// Mobile-first with EasyBroker brand colors
+
+.property-show {
+  background-color: $light-gray;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+
+  // Navigation
+  &__nav {
+    background-color: $eb-white;
+    border-bottom: 1px solid darken($light-gray, 10%);
+  }
+
+  &__back-link {
+    color: $eb-blue;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      color: darken($eb-blue, 15%);
+      text-decoration: underline;
+    }
+  }
+
+  // Hero Image
+  &__hero {
+    width: 100%;
+    max-height: 250px;
+    overflow: hidden;
+    background-color: darken($light-gray, 5%);
+
+    @media (min-width: 576px) {
+      max-height: 300px;
+    }
+
+    @media (min-width: 768px) {
+      max-height: 400px;
+    }
+
+    @media (min-width: 992px) {
+      max-height: 500px;
+    }
+  }
+
+  &__hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  // Content Container
+  &__content {
+    background-color: $eb-white;
+    margin: 0;
+
+    @media (min-width: 768px) {
+      max-width: 800px;
+      margin: -2rem auto 0;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 992px) {
+      max-width: 900px;
+      padding: 2rem !important;
+    }
+  }
+
+  // Header
+  &__header {
+    border-bottom: 1px solid $light-gray;
+    padding-bottom: 1rem;
+  }
+
+  &__type {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: $eb-blue;
+    color: $eb-white;
+  }
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: $eb-black;
+
+    @media (min-width: 576px) {
+      font-size: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  // Location
+  &__location {
+    font-size: 0.95rem;
+  }
+
+  // Prices
+  &__prices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    @media (min-width: 576px) {
+      flex-direction: row;
+      gap: 1.5rem;
+    }
+  }
+
+  &__price {
+    background-color: $light-gray;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    flex: 1;
+
+    &--sale {
+      border-left: 4px solid $green;
+    }
+
+    &--rent {
+      border-left: 4px solid $eb-blue;
+    }
+  }
+
+  &__price-label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: lighten($gray, 40%);
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+  }
+
+  &__price-value {
+    display: block;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $eb-black;
+
+    @media (min-width: 768px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  // Stats Grid
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+
+    @media (min-width: 576px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+  }
+
+  &__stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: $light-gray;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+
+    i {
+      color: $eb-blue;
+      width: 20px;
+      text-align: center;
+    }
+  }
+
+  // Sections
+  &__section {
+    padding-top: 1.5rem;
+    border-top: 1px solid $light-gray;
+  }
+
+  &__section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: $eb-black;
+  }
+
+  // Description
+  &__description {
+    color: lighten($gray, 20%);
+    line-height: 1.7;
+
+    p {
+      margin-bottom: 1rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // Features
+  &__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  &__feature {
+    background-color: lighten($eb-blue, 40%);
+    color: darken($eb-blue, 10%);
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+
+    i {
+      color: $green;
+    }
+  }
+
+  // Location Details
+  &__details {
+    margin: 0;
+  }
+
+  &__detail {
+    display: flex;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid $light-gray;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    dt {
+      flex: 0 0 100px;
+      font-weight: 500;
+      color: lighten($gray, 40%);
+
+      @media (min-width: 576px) {
+        flex: 0 0 130px;
+      }
+    }
+
+    dd {
+      flex: 1;
+      margin: 0;
+      color: $eb-black;
+    }
+  }
+
+  // Footer
+  &__footer {
+    padding-top: 1.5rem;
+    border-top: 1px solid $light-gray;
+  }
+}

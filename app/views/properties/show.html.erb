@@ -1,0 +1,161 @@
+<div class="property-show">
+  <div class="property-show__nav px-3 py-3">
+    <% if @referrer_chat_id.present? %>
+      <%= link_to chat_path(@referrer_chat_id), class: "property-show__back-link" do %>
+        <i class="fas fa-arrow-left me-2"></i>Volver al chat
+      <% end %>
+    <% else %>
+      <%= link_to root_path, class: "property-show__back-link" do %>
+        <i class="fas fa-arrow-left me-2"></i>Volver a chats
+      <% end %>
+    <% end %>
+  </div>
+
+  <% if @property.title_image_full.present? %>
+    <div class="property-show__hero">
+      <%= image_tag @property.title_image_full, alt: @property.title, class: "property-show__hero-image" %>
+    </div>
+  <% end %>
+
+  <div class="property-show__content px-3 py-4">
+    <div class="property-show__header mb-3">
+      <% if @property.property_type.present? %>
+        <span class="property-show__type badge mb-2">
+          <%= @property.property_type.capitalize %>
+        </span>
+      <% end %>
+      <h1 class="property-show__title"><%= @property.title %></h1>
+    </div>
+
+    <div class="property-show__location mb-4">
+      <i class="fas fa-map-marker-alt text-muted me-2"></i>
+      <span class="text-muted">
+        <%= [@property.city_area, @property.city, @property.region].compact.reject(&:blank?).join(", ") %>
+      </span>
+    </div>
+
+    <div class="property-show__prices mb-4">
+      <% if @property.for_sale? %>
+        <div class="property-show__price property-show__price--sale">
+          <span class="property-show__price-label">Precio de venta</span>
+          <span class="property-show__price-value">
+            <%= @property.sale_operation&.dig('formatted_price') || number_to_currency(@property.sale_price, unit: "#{@property.sale_currency} ") %>
+          </span>
+        </div>
+      <% end %>
+      <% if @property.for_rent? %>
+        <div class="property-show__price property-show__price--rent">
+          <span class="property-show__price-label">Renta mensual</span>
+          <span class="property-show__price-value">
+            <%= @property.rental_operation&.dig('formatted_price') || number_to_currency(@property.rental_price, unit: "#{@property.rental_currency} ") %>
+          </span>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @property.bedrooms.present? || @property.bathrooms.present? || @property.parking_spaces.present? || @property.construction_size.present? || @property.lot_size.present? %>
+      <div class="property-show__stats mb-4">
+        <% if @property.bedrooms.present? %>
+          <div class="property-show__stat">
+            <i class="fas fa-bed"></i>
+            <span><%= @property.bedrooms %> rec<%= @property.bedrooms == 1 ? '' : 's' %></span>
+          </div>
+        <% end %>
+        <% if @property.bathrooms.present? %>
+          <div class="property-show__stat">
+            <i class="fas fa-bath"></i>
+            <span><%= @property.bathrooms %> baño<%= @property.bathrooms == 1 ? '' : 's' %></span>
+          </div>
+        <% end %>
+        <% if @property.half_bathrooms.present? && @property.half_bathrooms > 0 %>
+          <div class="property-show__stat">
+            <i class="fas fa-bath"></i>
+            <span><%= @property.half_bathrooms %> medio baño<%= @property.half_bathrooms == 1 ? '' : 's' %></span>
+          </div>
+        <% end %>
+        <% if @property.parking_spaces.present? %>
+          <div class="property-show__stat">
+            <i class="fas fa-car"></i>
+            <span><%= @property.parking_spaces %> estac.</span>
+          </div>
+        <% end %>
+        <% if @property.construction_size.present? %>
+          <div class="property-show__stat">
+            <i class="fas fa-ruler-combined"></i>
+            <span><%= number_with_delimiter(@property.construction_size.to_i) %> m<sup>2</sup></span>
+          </div>
+        <% end %>
+        <% if @property.lot_size.present? %>
+          <div class="property-show__stat">
+            <i class="fas fa-expand"></i>
+            <span><%= number_with_delimiter(@property.lot_size.to_i) %> m<sup>2</sup> terreno</span>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @property.description.present? %>
+      <div class="property-show__section mb-4">
+        <h2 class="property-show__section-title">Descripcion</h2>
+        <div class="property-show__description">
+          <%= simple_format(@property.description) %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @property.features.present? && @property.features.any? %>
+      <div class="property-show__section mb-4">
+        <h2 class="property-show__section-title">Caracteristicas</h2>
+        <div class="property-show__features">
+          <% @property.features.each do |feature| %>
+            <span class="property-show__feature badge">
+              <i class="fas fa-check me-1"></i><%= feature %>
+            </span>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @property.street.present? || @property.city_area.present? || @property.city.present? || @property.region.present? || @property.postal_code.present? %>
+      <div class="property-show__section mb-4">
+        <h2 class="property-show__section-title">Ubicacion</h2>
+        <dl class="property-show__details">
+          <% if @property.street.present? %>
+            <div class="property-show__detail">
+              <dt>Calle</dt>
+              <dd><%= @property.street %></dd>
+            </div>
+          <% end %>
+          <% if @property.city_area.present? %>
+            <div class="property-show__detail">
+              <dt>Colonia</dt>
+              <dd><%= @property.city_area %></dd>
+            </div>
+          <% end %>
+          <% if @property.city.present? %>
+            <div class="property-show__detail">
+              <dt>Ciudad</dt>
+              <dd><%= @property.city %></dd>
+            </div>
+          <% end %>
+          <% if @property.region.present? %>
+            <div class="property-show__detail">
+              <dt>Estado</dt>
+              <dd><%= @property.region %></dd>
+            </div>
+          <% end %>
+          <% if @property.postal_code.present? %>
+            <div class="property-show__detail">
+              <dt>Codigo postal</dt>
+              <dd><%= @property.postal_code %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </div>
+    <% end %>
+
+    <div class="property-show__footer text-muted small">
+      <span>ID: <%= @property.public_id %></span>
+    </div>
+  </div>
+</div>
