@@ -9,11 +9,11 @@ A RAG (Retrieval-Augmented Generation) application for intelligent property sear
 ## Screenshots
 
 <p align="center">
-  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088042/WhatsApp_Image_2025-12-18_at_13.57.28_1_vykdwd.jpg" width="180" alt="App sign up"/>
-  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088043/WhatsApp_Image_2025-12-18_at_13.57.28_3_nlirty.jpg" width="180" alt="Location Detection"/>
-  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088043/WhatsApp_Image_2025-12-18_at_13.57.29_ii4quw.jpg" width="180" alt="Chat interface"/>
-  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088042/WhatsApp_Image_2025-12-18_at_13.57.28_2_txbiix.jpg" width="180" alt="Property details 1"/>
-  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088042/WhatsApp_Image_2025-12-18_at_13.57.28_kxycgb.jpg" width="180" alt="Property details 2"/>
+  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088042/WhatsApp_Image_2025-12-18_at_13.57.28_1_vykdwd.jpg" width="100" alt="App sign up"/>
+  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088043/WhatsApp_Image_2025-12-18_at_13.57.28_3_nlirty.jpg" width="100" alt="Location Detection"/>
+  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088043/WhatsApp_Image_2025-12-18_at_13.57.29_ii4quw.jpg" width="100" alt="Chat interface"/>
+  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088042/WhatsApp_Image_2025-12-18_at_13.57.28_2_txbiix.jpg" width="100" alt="Property details 1"/>
+  <img src="https://res.cloudinary.com/druc0epi3/image/upload/v1766088042/WhatsApp_Image_2025-12-18_at_13.57.28_kxycgb.jpg" width="100" alt="Property details 2"/>
 </p>
 
 ## Features
