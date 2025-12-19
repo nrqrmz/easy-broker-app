@@ -1,15 +1,33 @@
-<div class="container my-3">
-  <% if @chats.any? %>
-    <ul class="list-unstyled">
-      <% @chats.each_with_index do |chat, index| %>
-        <li><%= link_to "Chat ##{index + 1}", chat_path(chat) %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    There are no chats yet.
-  <% end %>
+<div class="chat-index">
+  <div class="chat-index__container">
+    <div class="chat-index__header">
+      <h1 class="chat-index__title">Chats</h1>
+    </div>
 
-  <%= simple_form_for @chat do |f| %>
-    <%= f.button :submit, "New chat", class: "btn btn-primary" %>
-  <% end %>
+    <% if @chats.any? %>
+      <ul class="chat-index__list">
+        <% @chats.each_with_index do |chat, index| %>
+          <li class="chat-index__item">
+            <%= link_to chat_path(chat), class: "chat-index__link" do %>
+              <i class="fas fa-comment-dots"></i>
+              Chat #<%= index + 1 %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <div class="chat-index__empty">
+        <i class="fas fa-comments fa-2x mb-3 d-block text-secondary"></i>
+        <p class="text-secondary">
+          There are no chats yet. Start a new conversation!
+        </p>
+      </div>
+    <% end %>
+
+    <div class="chat-index__new-chat">
+      <%= simple_form_for @chat do |f| %>
+        <%= f.button :submit, "New chat", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
 </div>
