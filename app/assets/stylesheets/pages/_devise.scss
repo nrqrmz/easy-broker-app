@@ -1,0 +1,113 @@
+// Devise Pages Styles
+// Mobile-first with EasyBroker brand colors
+
+.devise-page {
+  background-color: $light-gray;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    padding: 3rem 2rem;
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  &__card {
+    background-color: $eb-white;
+    border-radius: 0.5rem;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+
+    @media (min-width: 576px) {
+      padding: 2.5rem 2rem;
+    }
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $eb-black;
+    margin-bottom: 1.5rem;
+    text-align: center;
+
+    @media (min-width: 576px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  // Form Styles
+  .form-inputs {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-control {
+    border-radius: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid darken($light-gray, 15%);
+
+    &:focus {
+      border-color: $eb-blue;
+      box-shadow: 0 0 0 3px rgba($eb-blue, 0.15);
+    }
+  }
+
+  .form-actions {
+    margin-bottom: 1.5rem;
+
+    .btn {
+      width: 100%;
+      border-radius: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+    }
+  }
+
+  // Checkbox styling
+  .form-check-input {
+    border-radius: 0.25rem;
+
+    &:checked {
+      background-color: $eb-blue;
+      border-color: $eb-blue;
+    }
+
+    &:focus {
+      border-color: $eb-blue;
+      box-shadow: 0 0 0 3px rgba($eb-blue, 0.15);
+    }
+  }
+
+  // Links section
+  &__links {
+    text-align: center;
+    padding-top: 1rem;
+    border-top: 1px solid darken($light-gray, 5%);
+
+    a {
+      color: $eb-blue;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: block;
+      margin-bottom: 0.5rem;
+
+      &:hover {
+        color: darken($eb-blue, 15%);
+        text-decoration: underline;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
